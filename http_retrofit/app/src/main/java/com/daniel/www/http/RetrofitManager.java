@@ -76,6 +76,8 @@ public class RetrofitManager {
         //.socketFactory(sslSocketFactory)
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new CoreInterceptor(timeOutAndOther))
+                .connectTimeout((timeOutAndOther != null && timeOutAndOther.length > 0) ?
+                        Integer.valueOf(timeOutAndOther[0]) : TIME_OUT, TimeUnit.MILLISECONDS)
                 .readTimeout((timeOutAndOther != null && timeOutAndOther.length > 0) ?
                         Integer.valueOf(timeOutAndOther[0]) : TIME_OUT, TimeUnit.MILLISECONDS)
                 .cache(cache)
